@@ -5,7 +5,7 @@ define('BOT_TOKEN', '7420595045:AAEOl9AF0b54DANkh_9tSyMGcmv_n9CHh0k'); // token 
 $data = file_get_contents('php://input');
 $json = json_decode($data, true);
 
-$allowedGroupIds = ['-1002198022536']; // List ID group chat ['ID nhóm 1', 'ID nhóm 2']
+$allowedGroupIds = ['-1002194221873']; // List ID group chat ['ID nhóm 1', 'ID nhóm 2']
 $adminChatIds = ['6265675010']; // List ID admin (cách lấy id thì vào @MissRose_bot sài lệnh /id @duyvinh09)
 
 if (isset($json['message']['text'])) {
