@@ -6,7 +6,7 @@ $data = file_get_contents('php://input');
 $json = json_decode($data, true);
 
 $allowedGroupIds = ['-1002194221873']; // List ID group chat ['ID nhóm 1', 'ID nhóm 2']
-$adminChatIds = ['6265675010']; // List ID admin (cách lấy id thì vào @MissRose_bot sài lệnh /id @duyvinh09)
+$adminChatIds = ['6681555774']; // List ID admin (cách lấy id thì vào @MissRose_bot sài lệnh /id @duyvinh09)
 
 if (isset($json['message']['text'])) {
     $message = $json['message']['text'];
