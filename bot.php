@@ -48,17 +48,17 @@ if (isset($json['message']['text'])) {
                                 preg_match('/facebook.com\/(?:[^\/]*\/)*([^\/?]+)/i', $input, $matches);
                                 $facebookId = isset($matches[1]) ? $matches[1] : null;
                                 $messageSentId = sendMessage($chatId, "🔎   Đang lấy thông tin...", $messageId);
-                                $apiUrl = 'https://scaninfo.vn/api/convertID.php?url=' . urlencode($input); // đường link dẫn tới file convertID.php
+                                $apiUrl = 'https://github.com/mrducmuaflo/bot-scan/blob/main/convertID.php?url=' . urlencode($input); // đường link dẫn tới file convertID.php
                             } else {
                                 $messageSentId = sendMessage($chatId, "🔎  Đang lấy thông tin...", $messageId);
-                                $apiUrl = 'https://scaninfo.vn/api/convertID.php?url=' . urlencode($input);
+                                $apiUrl = 'https://github.com/mrducmuaflo/bot-scan/blob/main/convertID.php?url=' . urlencode($input);
                             }
                             
                             $response = file_get_contents($apiUrl);
                             $dataFromApi = json_decode($response, true);
                             if (isset($dataFromApi['id'])) {
                                 $userId = $dataFromApi['id'];
-                                $apiUrl = 'https://scaninfo.vn/api/apiCheck.php?id=' . urlencode($userId); // đường link dẫn tới file apiCheck.php
+                                $apiUrl = 'https://github.com/mrducmuaflo/bot-scan/blob/main/apiCheck.php?id=' . urlencode($userId); // đường link dẫn tới file apiCheck.php
                                 $response = file_get_contents($apiUrl);
                                 $dataFromApi = json_decode($response, true);
                                 if (isset($dataFromApi['status']) && $dataFromApi['status'] === 'error') {
