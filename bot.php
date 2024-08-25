@@ -5,8 +5,8 @@ define('BOT_TOKEN', '7420595045:AAEOl9AF0b54DANkh_9tSyMGcmv_n9CHh0k'); // token 
 $data = file_get_contents('php://input');
 $json = json_decode($data, true);
 
-$allowedGroupIds = ['-1002194221873']; // List ID group chat ['ID nhóm 1', 'ID nhóm 2']
-$adminChatIds = ['6681555774']; // List ID admin (cách lấy id thì vào @MissRose_bot sài lệnh /id @duyvinh09)
+$allowedGroupIds = ['-1002198022536']; // List ID group chat ['ID nhóm 1', 'ID nhóm 2']
+$adminChatIds = ['6265675010']; // List ID admin (cách lấy id thì vào @MissRose_bot sài lệnh /id @duyvinh09)
 
 if (isset($json['message']['text'])) {
     $message = $json['message']['text'];
@@ -34,11 +34,11 @@ if (isset($json['message']['text'])) {
             }
         }
         
-        if (stripos($message, 'info') === 0) {
+        if (stripos($message, '/fb') === 0) {
             if ($isAllowedGroup || $isAdmin) {
                 $url = trim(substr($message, $urlStartIndex + 1));
                 if (!empty($url)) {
-                    $input = trim(str_ireplace('info', '', $message));
+                    $input = trim(str_ireplace('/fb', '', $message));
                     if (is_numeric($input) || stripos($input, 'facebook.com') !== false || !empty($input)) {
                         if (stripos($input, 'facebook.com') !== false || !is_numeric($input)) {
                             if (stripos($input, 'facebook.com') !== false) {
@@ -48,17 +48,17 @@ if (isset($json['message']['text'])) {
                                 preg_match('/facebook.com\/(?:[^\/]*\/)*([^\/?]+)/i', $input, $matches);
                                 $facebookId = isset($matches[1]) ? $matches[1] : null;
                                 $messageSentId = sendMessage($chatId, "🔎   Đang lấy thông tin...", $messageId);
-                                $apiUrl = 'https://github.com/mrducmuaflo/bot-scan/blob/main/convertID.php?url=' . urlencode($input); // đường link dẫn tới file convertID.php
+                                $apiUrl = 'https://mrducmuaflo4321.000webhostapp.com/convertID.php?url=' . urlencode($input); // đường link dẫn tới file convertID.php
                             } else {
                                 $messageSentId = sendMessage($chatId, "🔎  Đang lấy thông tin...", $messageId);
-                                $apiUrl = 'https://github.com/mrducmuaflo/bot-scan/blob/main/convertID.php?url=' . urlencode($input);
+                                $apiUrl = 'https://mrducmuaflo4321.000webhostapp.com/convertID.php?url=' . urlencode($input);
                             }
                             
                             $response = file_get_contents($apiUrl);
                             $dataFromApi = json_decode($response, true);
                             if (isset($dataFromApi['id'])) {
                                 $userId = $dataFromApi['id'];
-                                $apiUrl = 'https://github.com/mrducmuaflo/bot-scan/blob/main/apiCheck.php?id=' . urlencode($userId); // đường link dẫn tới file apiCheck.php
+                                $apiUrl = 'https://mrducmuaflo4321.000webhostapp.com/apiCheck.php?id=' . urlencode($userId); // đường link dẫn tới file apiCheck.php
                                 $response = file_get_contents($apiUrl);
                                 $dataFromApi = json_decode($response, true);
                                 if (isset($dataFromApi['status']) && $dataFromApi['status'] === 'error') {
@@ -74,7 +74,7 @@ if (isset($json['message']['text'])) {
                             }
                         } else {
                             $messageSentId = sendMessage($chatId, "🔎  Đang lấy thông tin...", $messageId);
-                            $apiUrl = 'https://scaninfo.vn/api/apiCheck.php?id=' . urlencode($input);
+                            $apiUrl = 'https://mrducmuaflo4321.000webhostapp.com/apiCheck.php?id=' . urlencode($input);
                             $response = file_get_contents($apiUrl);
                             $dataFromApi = json_decode($response, true);
                             if (isset($dataFromApi['status']) && $dataFromApi['status'] === 'error') {
@@ -88,15 +88,15 @@ if (isset($json['message']['text'])) {
                         }
                     }
                 } else {
-                    sendMessage($chatId, "⚠️ Vui lòng nhập một ID, Facebook link, hoặc username sau info.", $messageId);
+                    sendMessage($chatId, "⚠️ Vui lòng nhập một ID, Facebook link, hoặc username sau /fb.", $messageId);
                 }
             } else {
-                sendMessage($chatId, "❌ Bạn không có quyền sử dụng lệnh này. Vui lòng truy cập nhóm @tienich để sử dụng lệnh info.", $messageId);
+                sendMessage($chatId, "❌ Bạn không có quyền sử dụng lệnh này. Vui lòng truy cập nhóm @tjanxsmsđể sử dụng lệnh /fb.", $messageId);
             }
             exit;
         }
     } else {
-        sendMessage($chatId, "❌ Bạn không có quyền sử dụng BOT này. Vui lòng inbox cho @duyvinh09 để được hỗ trợ.", $messageId);
+        sendMessage($chatId, "❌ Bạn không có quyền sử dụng BOT này. Vui lòng inbox cho @janxnovak để được hỗ trợ.", $messageId);
     }
 }
 
